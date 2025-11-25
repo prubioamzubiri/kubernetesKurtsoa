@@ -20,10 +20,15 @@ spec:
         envFrom:
         - configMapRef:
             name: pma-config
-        resources:
-          requests:
-            cpu: 100m           
-            memory: 128Mi
-          limits:
-            cpu: 200m
-            memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pma-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: phpmyadmin
+  ports:
+  - port: 80
+    targetPort: 80

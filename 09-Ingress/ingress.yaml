@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: miweb-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: miweb.local
+      http:
+       paths:
+       - path: /
+         pathType: Prefix
+         backend:
+           service:
+             name: pma-service
+             port:
+              number: 80
+       - path: /myfirstlb
+         pathType: Prefix
+         backend:
+           service:
+             name: myfirstlb
+             port:
+              number: 80
+    - host: wordpress.local
+      http:
+       paths:
+       - path: /
+         pathType: Prefix
+         backend:
+           service:
+             name: wordpress-service
+             port:
+              number: 80
