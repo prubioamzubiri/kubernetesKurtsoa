@@ -4,6 +4,11 @@ metadata:
   name: myfirstdeployment
 spec:
   replicas: 7
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: tknika-nginx
@@ -23,7 +28,7 @@ spec:
         - name: contenido
           image: ubuntu
           command: ["/bin/sh"]
-          args: ["-c", "echo Kaixo Tknikatik > /data/index.html && tail -f /dev/null"]
+          args: ["-c", "echo Kaixo Tknikatik 5 > /data/index.html && tail -f /dev/null"]
           volumeMounts:
             - mountPath: /data
               name: bolumena

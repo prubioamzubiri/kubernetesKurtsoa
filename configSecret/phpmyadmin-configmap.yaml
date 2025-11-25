@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pma-config
+data:
+  PMA_HOST: mysql-lb
+  PMA_PORT: "3306"
